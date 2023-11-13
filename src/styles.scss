@@ -1,0 +1,28 @@
+@import "assets/colors";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  padding: 6rem;
+  background:  radial-gradient(
+      ellipse at center,
+      $primary-800 50%,
+      rgb(0, 0, 0) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}

@@ -1,0 +1,65 @@
+<app-toast-notification></app-toast-notification>
+
+<main class="main">
+  <div class="main__logo-box">
+    <img src="assets/images/logo.png" alt="Logo" class="main__logo">
+  </div>
+
+  <header class="main__text-box">
+    <h1 class="heading">
+      <span class="heading--sub">Start for free</span>
+      <span class="heading--main">Create new account</span>
+    </h1>
+  </header>
+
+  <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="signup-form">
+    <fieldset class="signup-form__group-row">
+      <div class="signup-form__group signup-form__group--row-item">
+        <label for="first-name" class="signup-form__label">First name</label>
+        <input type="text" name="firstName" id="first-name" class="signup-form__input"
+               formControlName="firstName"
+               [ngClass]="{'signup-form__input--has-error': validationService.isError(signUpForm, 'firstName','required')}">
+        <div *ngIf="validationService.isError(signUpForm, 'firstName','required')"
+             class="signup-form__input--error">
+          First name is required
+        </div>
+      </div>
+      <div class="signup-form__group signup-form__group--row-item">
+        <label for="last-name" class="signup-form__label">Last name</label>
+        <input type="text" name="lastName" id="last-name" class="signup-form__input"
+               formControlName="lastName"
+               [ngClass]="{'signup-form__input--has-error': validationService.isError(signUpForm, 'lastName','required')}">
+        <div *ngIf="validationService.isError(signUpForm, 'lastName','required')"
+             class="signup-form__input--error">
+          Last name is required
+        </div>
+      </div>
+    </fieldset>
+    <div class="signup-form__group">
+      <label for="email" class="signup-form__label">Email</label>
+      <input type="email" name="email" id="email" formControlName="email" class="signup-form__input"
+             [ngClass]="{'signup-form__input--has-error': validationService.isError(signUpForm, 'email','invalidEmail')}">
+      <div *ngIf="validationService.isError(signUpForm, 'email','invalidEmail')"
+           class="signup-form__input--error">
+        Please enter a valid email.
+      </div>
+    </div>
+    <div class="signup-form__group">
+      <label for="password" class="signup-form__label">Password</label>
+
+      <input type="password" name="password" id="password" class="signup-form__input"
+             formControlName="password"
+             [ngClass]="{'signup-form__input--has-error': validationService.isError(signUpForm, 'password', 'invalidPassword')}">
+      <div *ngIf="validationService.isError(signUpForm, 'password', 'invalidPassword')"
+           class="signup-form__input--error">
+        <ng-container *ngIf="signUpForm.errors?.['invalidPassword']">
+          <div *ngFor="let errorKey of validationService.getObjectKeys(signUpForm.errors?.['invalidPassword'])">
+            {{validationService.passwordErrorMessage(errorKey)}}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <button class="signup-form__button" [disabled]="signUpForm.invalid">Sign up
+    </button>
+  </form>
+</main>
